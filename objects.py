@@ -28,9 +28,10 @@ class Cell:
         self._win = win
 
     def draw(self, top_left_x, top_left_y, bottom_right_x, bottom_right_y):
+        if self._win is None:
+            return
         self._x1 = top_left_x
         self._y1 = top_left_y
-
         self._x2 = bottom_right_x
         self._y2 = bottom_right_y
         if self.has_top_wall:
@@ -53,3 +54,19 @@ class Cell:
                 Point(top_left_x, top_left_y), Point(top_left_x, bottom_right_y)
             )
             self._win.draw_line(line)
+
+    def draw_move(self, to_cell, undo=False):
+        color = "red"
+        if undo:
+            color = "gray"
+
+        x = self._x1 + abs(self._x1 - self._x2) // 2
+        y = self._y1 + abs(self._y1 - self._y2) // 2
+        point1 = Point(x, y)
+        x = to_cell._x1 + abs(to_cell._x1 - to_cell._x2) / 2
+        y = to_cell._y1 + abs(to_cell._y1 - to_cell._y2) / 2
+        point2 = Point(x, y)
+        print(x, y)
+
+        line = Line(point1, point2)
+        self._win.draw_line(line, color)
