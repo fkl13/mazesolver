@@ -66,7 +66,5 @@ class Cell:
         x = to_cell._x1 + abs(to_cell._x1 - to_cell._x2) / 2
         y = to_cell._y1 + abs(to_cell._y1 - to_cell._y2) / 2
         point2 = Point(x, y)
-        print(x, y)
-
         line = Line(point1, point2)
         self._win.draw_line(line, color)
